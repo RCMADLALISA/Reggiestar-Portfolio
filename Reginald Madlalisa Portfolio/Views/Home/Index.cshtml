@@ -1,0 +1,101 @@
+﻿@model PortfolioViewModel
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<!-- Hero Section -->
+<section class="py-5 text-center container" id="about">
+    <div class="row py-lg-5 align-items-center">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="profile-picture-container">
+                <img src="~/images/profile-picture.jpg" alt="@Model.PersonalInfo.Name"
+                     class="img-fluid rounded-circle profile-picture shadow-lg">
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h1 class="fw-bold">@Model.PersonalInfo.Name</h1>
+            <h2 class="fw-light">@Model.PersonalInfo.Title</h2>
+            <p class="lead text-muted">@Model.PersonalInfo.Introduction</p>
+            <p>
+                <a href="mailto:@Model.PersonalInfo.Email" class="btn btn-primary my-2">Contact Me</a>
+                <a href="~/CV/Reginald_Cebisile_Madlalisa_CV.pdf" class="btn btn-secondary my-2" download>Download CV</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="py-5 bg-light" id="skills">
+    <div class="container">
+        <h2 class="text-center mb-5">Skills & Expertise</h2>
+        <div class="row">
+            @foreach (var skillGroup in Model.Skills)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@skillGroup.Category</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach (var skill in skillGroup.Items)
+                                {
+                                    <span class="badge bg-primary">@skill</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="py-5" id="projects">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Projects</h2>
+        <div class="row">
+            @foreach (var project in Model.Projects)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="@project.ImagePath" class="card-img-top" alt="@project.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@project.Title</h5>
+                            <p class="card-text">@project.Description</p>
+                            <div class="mb-3">
+                                @foreach (var tech in project.Technologies)
+                                {
+                                    <span class="badge bg-secondary me-1">@tech</span>
+                                }
+                            </div>
+                            <a href="@project.Link" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5 bg-light" id="contact">
+    <div class="container">
+        <h2 class="text-center mb-5">Get In Touch</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <p class="lead">I'm always open to new opportunities and collaborations.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="mailto:@Model.PersonalInfo.Email" class="btn btn-outline-dark">
+                        <i class="fas fa-envelope me-2"></i>Email
+                    </a>
+                    <a href="@Model.PersonalInfo.GitHub" class="btn btn-outline-dark">
+                        <i class="fab fa-github me-2"></i>GitHub
+                    </a>
+                    <a href="@Model.PersonalInfo.LinkedIn" class="btn btn-outline-dark">
+                        <i class="fab fa-linkedin me-2"></i>LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
